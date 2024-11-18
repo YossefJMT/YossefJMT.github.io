@@ -173,23 +173,28 @@ function handlePageNavigation() {
   const navigationLinks = document.querySelectorAll("[data-nav-link]");
   const pages = document.querySelectorAll("[data-page]");
 
-  navigationLinks.forEach((link, index) => {
+  navigationLinks.forEach((link) => {
     link.addEventListener("click", function () {
-      pages.forEach((page, pageIndex) => {
-        if (this.innerHTML.toLowerCase() === page.dataset.page) {
-          page.classList.add("active");
-          navigationLinks[pageIndex].classList.add("active");
-          window.scrollTo(0, 0);
-          addCardEffect();
-          updateFullPageObjectHeight();
-        } else {
-          page.classList.remove("active");
-          navigationLinks[pageIndex].classList.remove("active");
-        }
-      });
+      // Primero, remover 'active' de todos los enlaces y páginas
+      navigationLinks.forEach(navLink => navLink.classList.remove("active"));
+      pages.forEach(page => page.classList.remove("active"));
+
+      // Activar el enlace clickeado
+      this.classList.add("active");
+
+      // Activar la página correspondiente
+      const targetPage = this.innerHTML.toLowerCase().trim();
+      const pageToShow = document.querySelector(`[data-page="${targetPage}"]`);
+      if (pageToShow) {
+        pageToShow.classList.add("active");
+        window.scrollTo(0, 0);
+        addCardEffect();
+        updateFullPageObjectHeight();
+      }
     });
   });
 }
+
 
 // Función para añadir efecto de tarjeta
 function addCardEffect() {
