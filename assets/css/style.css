@@ -243,6 +243,12 @@ article {
   --ionicon-stroke-width: 35px;
 }
 
+.icon {
+  width: 50px;  
+  height: 50px;
+  object-fit: cover;
+}
+
 article {
   display: none;
 }
